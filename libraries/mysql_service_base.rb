@@ -113,7 +113,7 @@ module MysqlCookbook
           code init_records_script
           umask '022'
           returns [0, 1, 2] # facepalm
-          not_if "/usr/bin/test -f #{data_dir}/mysql/user.frm"
+          only_if { ::File.exist?("#{data_dir}/mysql/user.frm") }
           action :run
         end
       end
